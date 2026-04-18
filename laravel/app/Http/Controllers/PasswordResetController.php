@@ -35,7 +35,7 @@ class PasswordResetController extends Controller
         // Delete any existing token for this email
         DB::table('password_reset_tokens')->where('email', $request->email)->delete();
 
-        // Generate token
+        // Generate token.
         $token = Str::random(64);
 
         DB::table('password_reset_tokens')->insert([
