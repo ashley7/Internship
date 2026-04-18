@@ -65,6 +65,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Students</th>
                                 <th>Status</th>
                                 <th></th>
@@ -82,6 +83,7 @@
                                     </div>
                                 </td>
                                 <td class="text-muted">{{ $sv->email }}</td>
+                                <td> <small class="text-muted">{{ $sv->phone }}</small></td>
                                 <td><span class="badge bg-light text-dark border">{{ $sv->supervised_students_count }} students</span></td>
                                 <td>
                                     <span class="status-badge {{ $sv->is_active ? 'badge-approved' : 'badge-declined' }}">

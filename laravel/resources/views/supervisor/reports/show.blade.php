@@ -109,6 +109,7 @@
                 <table class="table table-sm mb-0" style="font-size:.82rem;">
                     <tr><td class="text-muted">School</td><td>{{ $report->student->school }}</td></tr>
                     <tr><td class="text-muted">Email</td><td>{{ $report->student->user->email }}</td></tr>
+                    <tr><td class="text-muted">Phone</td><td>{{ $report->student->user->phone }}</td></tr>
                 </table>
             </div>
         </div>

@@ -43,6 +43,7 @@
                                 <div>
                                     <div class="fw-semibold">{{ $student->user->name }}</div>
                                     <small class="text-muted">{{ $student->user->email }}</small>
+                                    <small class="text-muted">{{ $student->user->phone }}</small>
                                 </div>
                             </div>
                         </td>
