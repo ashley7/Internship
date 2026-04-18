@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\StudentController;
@@ -11,6 +12,12 @@ Route::get('/',       fn() => redirect()->route('login'));
 Route::get('/login',  [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+
+// ── Password Reset ────────────────────────────────────────────
+Route::get('/forgot-password',          [PasswordResetController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password',         [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}',   [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
+Route::post('/reset-password',          [PasswordResetController::class, 'resetPassword'])->name('password.reset');
 
 // ── Super Admin ───────────────────────────────────────────────
 Route::prefix('admin')->name('super_admin.')->middleware(['auth', 'role:super_admin'])->group(function () {
