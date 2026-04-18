@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('title', 'Reports')
-@section('page-title', 'Student Reports')
+@section('page-title', 'Intern Doctor Reports')
 
 @section('sidebar-links')
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link"><i class="bi bi-people"></i> My Students</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link"><i class="bi bi-people"></i> My Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link active"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 
@@ -15,9 +15,9 @@
     <div class="card-body py-3">
         <form action="{{ route('supervisor.reports') }}" method="GET" class="row g-2 align-items-end">
             <div class="col-md-3">
-                <label class="form-label mb-1">Student</label>
+                <label class="form-label mb-1">Intern Doctors</label>
                 <select name="student_id" class="form-select form-select-sm">
-                    <option value="">All Students</option>
+                    <option value="">All Intern Doctors</option>
                     @foreach($myStudents as $s)
                         <option value="{{ $s->id }}" {{ ($filters['student_id'] ?? '') == $s->id ? 'selected' : '' }}>
                             {{ $s->user->name }}
@@ -56,7 +56,7 @@
         <div class="table-responsive">
             <table class="table mb-0">
                 <thead>
-                    <tr><th>Student</th><th>Date</th><th>Status</th><th>Attachments</th><th>Notes</th><th>Actions</th></tr>
+                    <tr><th>Intern Doctor</th><th>Date</th><th>Status</th><th>Attachments</th><th>Notes</th><th>Actions</th></tr>
                 </thead>
                 <tbody>
                     @forelse($reports as $report)

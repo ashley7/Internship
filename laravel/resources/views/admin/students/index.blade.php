@@ -13,8 +13,8 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h5 class="mb-0 fw-bold" style="color:#1a5276">All Students</h5>
-        <small class="text-muted">{{ $students->total() }} student(s) across all supervisors</small>
+        <h5 class="mb-0 fw-bold" style="color:#1a5276">All Intern Doctors</h5>
+        <small class="text-muted">{{ $students->total() }} Intern Doctor(s) across all supervisors</small>
     </div>
 </div>
 
@@ -25,8 +25,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Student</th>
-                        <th>Student No.</th>
+                        <th>Intern Doctors</th>
+                        <th>Intern Doctors No.</th>
                         <th>School</th>
                         <th>Supervisor</th>
                         <th>Reports</th>
@@ -61,7 +61,7 @@
                     </tr>
                     @empty
                     <tr><td colspan="7" class="text-center text-muted py-5">
-                        <i class="bi bi-people fs-2 d-block mb-2 opacity-25"></i>No students yet.
+                        <i class="bi bi-people fs-2 d-block mb-2 opacity-25"></i>No Intern Doctors yet.
                     </td></tr>
                     @endforelse
                 </tbody>

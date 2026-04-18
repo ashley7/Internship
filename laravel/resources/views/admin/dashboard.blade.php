@@ -13,7 +13,7 @@
         <i class="bi bi-person-badge"></i> Supervisors
     </a>
     <a href="{{ route('super_admin.students') }}" class="sidebar-link {{ request()->routeIs('super_admin.students*') ? 'active' : '' }}">
-        <i class="bi bi-people"></i> Students
+        <i class="bi bi-people"></i> Intern Doctors
     </a>
 @endsection
 
@@ -30,7 +30,7 @@
         <div class="card stat-card" style="background: linear-gradient(135deg,#1a7a4a,#27ae60); color:#fff;">
             <div class="stat-icon" style="background:rgba(255,255,255,.15)"><i class="bi bi-people" style="color:#fff"></i></div>
             <div class="stat-value">{{ $stats['students'] }}</div>
-            <div class="stat-label">Students</div>
+            <div class="stat-label">Intern Doctors</div>
         </div>
     </div>
     <div class="col-sm-6 col-xl-3">
@@ -66,7 +66,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Students</th>
+                                <th>Intern Doctors</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
@@ -84,7 +84,7 @@
                                 </td>
                                 <td class="text-muted">{{ $sv->email }}</td>
                                 <td> <small class="text-muted">{{ $sv->phone }}</small></td>
-                                <td><span class="badge bg-light text-dark border">{{ $sv->supervised_students_count }} students</span></td>
+                                <td><span class="badge bg-light text-dark border">{{ $sv->supervised_students_count }} Intern Doctors</span></td>
                                 <td>
                                     <span class="status-badge {{ $sv->is_active ? 'badge-approved' : 'badge-declined' }}">
                                         {{ $sv->is_active ? 'Active' : 'Inactive' }}
@@ -122,7 +122,7 @@
                     <i class="bi bi-person-badge me-2"></i>Manage Supervisors
                 </a>
                 <a href="{{ route('super_admin.students') }}" class="btn btn-outline-secondary">
-                    <i class="bi bi-people me-2"></i>View All Students
+                    <i class="bi bi-people me-2"></i>View All Intern Doctors
                 </a>
             </div>
         </div>

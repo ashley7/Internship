@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Edit Student')
-@section('page-title', 'Edit Student')
+@section('title', 'Edit Intern Doctor')
+@section('page-title', 'Edit Intern Doctor')
 
 @section('sidebar-links')
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Students</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 

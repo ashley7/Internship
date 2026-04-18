@@ -87,7 +87,7 @@
             </div>
             <div class="card-body">
                 @forelse($report->notes as $note)
-                <div class="note-bubble {{ $note->user->isSupervisor() ? 'supervisor' : 'student' }}">
+                <div class="note-bubble {{ $note->user->isSupervisor() ? 'supervisor' : 'Intern Doctor' }}">
                     <div class="d-flex justify-content-between align-items-center mb-1">
                         <strong style="font-size:.82rem;">
                             {{ $note->user->name }}

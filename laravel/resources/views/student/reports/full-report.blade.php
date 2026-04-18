@@ -66,14 +66,15 @@
 
     <div class="row g-4">
         <div class="col-md-6">
-            <div style="opacity:.7;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Student</div>
+            <div style="opacity:.7;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Intern Doctor</div>
             <div style="font-size:1.3rem;font-weight:700;">{{ $student->user->name }}</div>
             <div style="opacity:.8;font-size:.875rem;">{{ $student->user->email }}</div>
+            <div style="opacity:.8;font-size:.875rem;">{{ $student->user->phone }}</div>
         </div>
         <div class="col-md-6">
             <div style="opacity:.7;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Institution</div>
             <div style="font-size:1.1rem;font-weight:600;">{{ $student->school }}</div>
-            <div style="opacity:.8;font-size:.875rem;">Student No: {{ $student->student_number }}</div>
+            <div style="opacity:.8;font-size:.875rem;">Intern Doctor No: {{ $student->student_number }}</div>
         </div>
         <div class="col-md-6">
             <div style="opacity:.7;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Supervisor</div>

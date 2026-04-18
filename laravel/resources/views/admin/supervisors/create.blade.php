@@ -7,7 +7,7 @@
     <a href="{{ route('super_admin.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
     <a href="{{ route('super_admin.supervisors') }}" class="sidebar-link active"><i class="bi bi-person-badge"></i> Supervisors</a>
-    <a href="{{ route('super_admin.students') }}" class="sidebar-link"><i class="bi bi-people"></i> Students</a>
+    <a href="{{ route('super_admin.students') }}" class="sidebar-link"><i class="bi bi-people"></i> Intern Doctors</a>
 @endsection
 
 @section('content')

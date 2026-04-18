@@ -1,23 +1,23 @@
 @extends('layouts.app')
-@section('title', 'My Students')
-@section('page-title', 'My Students')
+@section('title', 'My Intern Doctors')
+@section('page-title', 'My Intern Doctors')
 
 @section('sidebar-links')
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Students</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h5 class="mb-0 fw-bold" style="color:#1a5276">My Students</h5>
-        <small class="text-muted">{{ $students->total() }} student(s) under your supervision</small>
+        <h5 class="mb-0 fw-bold" style="color:#1a5276">My Intern Doctors</h5>
+        <small class="text-muted">{{ $students->total() }} Intern Doctor(s) under your supervision</small>
     </div>
     <a href="{{ route('supervisor.students.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-lg me-2"></i>Add Student
+        <i class="bi bi-plus-lg me-2"></i>Add Intern Doctors
     </a>
 </div>
 
@@ -27,7 +27,7 @@
             <table class="table mb-0">
                 <thead>
                     <tr>
-                        <th>#</th><th>Student</th><th>Student No.</th>
+                        <th>#</th><th>Intern Doctor</th><th>Intern Doctor No.</th>
                         <th>School</th><th>Internship Period</th><th>Reports</th><th>Actions</th>
                     </tr>
                 </thead>
@@ -67,7 +67,7 @@
                     @empty
                     <tr><td colspan="7" class="text-center text-muted py-5">
                         <i class="bi bi-people fs-2 d-block mb-2 opacity-25"></i>
-                        No students yet. <a href="{{ route('supervisor.students.create') }}">Add your first student.</a>
+                        No Intern Doctor yet. <a href="{{ route('supervisor.students.create') }}">Add your first Intern Doctor.</a>
                     </td></tr>
                     @endforelse
                 </tbody>

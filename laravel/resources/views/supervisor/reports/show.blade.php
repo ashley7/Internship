@@ -6,7 +6,7 @@
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link"><i class="bi bi-people"></i> My Students</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link"><i class="bi bi-people"></i> My Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link active"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 
@@ -61,7 +61,7 @@
             <div class="card-header"><i class="bi bi-chat-left-text me-2"></i>Notes & Feedback</div>
             <div class="card-body">
                 @forelse($report->notes as $note)
-                <div class="note-bubble {{ $note->user->isSupervisor() ? 'supervisor' : 'student' }}">
+                <div class="note-bubble {{ $note->user->isSupervisor() ? 'supervisor' : 'Intern Doctors' }}">
                     <div class="d-flex justify-content-between align-items-center mb-1">
                         <strong style="font-size:.82rem;">
                             {{ $note->user->name }}
@@ -95,7 +95,7 @@
     <div class="col-lg-4">
         <!-- Student Info -->
         <div class="card mb-4">
-            <div class="card-header"><i class="bi bi-person me-2"></i>Student Info</div>
+            <div class="card-header"><i class="bi bi-person me-2"></i>Intern Doctor Info</div>
             <div class="card-body">
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <div style="width:48px;height:48px;border-radius:50%;background:#d5f5e3;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1e8449;font-size:1.1rem;">

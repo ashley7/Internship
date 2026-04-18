@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Add Student')
-@section('page-title', 'Add Student')
+@section('title', 'Add Intern Doctor')
+@section('page-title', 'Add Intern Doctor')
 
 @section('sidebar-links')
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Students</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 
@@ -14,15 +14,15 @@
 <div class="d-flex align-items-center gap-3 mb-4">
     <a href="{{ route('supervisor.students') }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
     <div>
-        <h5 class="mb-0 fw-bold" style="color:#1a5276">Add Student Intern</h5>
-        <small class="text-muted">Student will use these credentials to submit daily reports</small>
+        <h5 class="mb-0 fw-bold" style="color:#1a5276">Add Intern Doctor</h5>
+        <small class="text-muted">Intern Doctors will use these credentials to submit daily reports</small>
     </div>
 </div>
 
 <div class="row justify-content-center">
 <div class="col-lg-8">
 <div class="card">
-    <div class="card-header"><i class="bi bi-person-plus me-2"></i>Student Details</div>
+    <div class="card-header"><i class="bi bi-person-plus me-2"></i>Intern Doctor Details</div>
     <div class="card-body p-4">
         <form action="{{ route('supervisor.students.store') }}" method="POST">
             @csrf
@@ -31,7 +31,7 @@
                 <div class="col-12">
                     <label class="form-label">Full Name *</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                           value="{{ old('name') }}" placeholder="Student's full name" required>
+                           value="{{ old('name') }}" placeholder="Intern Doctor's full name" required>
                     @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-6">
@@ -64,7 +64,7 @@
                     @error('school')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Student Number *</label>
+                    <label class="form-label">Intern Doctor Number *</label>
                     <input type="text" name="student_number" class="form-control @error('student_number') is-invalid @enderror"
                            value="{{ old('student_number') }}" placeholder="e.g. 2021/MED/001" required>
                     @error('student_number')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-12 pt-2">
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2 me-2"></i>Create Student Account</button>
+                        <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2 me-2"></i>Create Intern Doctor Account</button>
                         <a href="{{ route('supervisor.students') }}" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                 </div>
