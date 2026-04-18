@@ -47,7 +47,7 @@ class PasswordResetController extends Controller
         // Send mail
         $resetUrl = route('password.reset.form', ['token' => $token, 'email' => $request->email]);
 
-        Mail::to($user->email)->send(new Resetpasswordmail($user, $resetUrl));
+        Mail::to($user->email)->send(new Resetpasswordmail($user, $resetUrl,$token,$request->email));
 
         return back()->with('status', 'A password reset link has been sent to your email address.');
     }

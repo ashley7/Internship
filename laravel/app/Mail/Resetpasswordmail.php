@@ -17,6 +17,8 @@ class Resetpasswordmail extends Mailable
      public function __construct(
         public User   $user,
         public string $resetUrl,
+        public string $token,
+        public string $email,
     ) {}
  
     public function envelope(): Envelope
