@@ -1,66 +1,264 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MedIntern — Medical Internship Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A complete Laravel 11 + Bootstrap 5 web application for managing medical student internship records.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🏗 Architecture
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+Service → Request → Controller
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Models** — Eloquent with relationships
+- **Services** — Business logic (`UserService`, `ReportService`)
+- **Controllers** — Thin, delegates to services
+- **Middleware** — Role-based access control (`RoleMiddleware`)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 👥 Roles
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Role | Created By | Capabilities |
+|------|-----------|-------------|
+| `super_admin` | Seeded | Create/manage supervisors, view all students |
+| `supervisor` | Super Admin | Create/manage students, review & approve reports |
+| `student` | Supervisor | Submit daily reports, add notes, generate full report |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 📦 Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- PHP >= 8.2
+- Composer
+- MySQL / MariaDB
+- Node.js (optional, for asset compilation)
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## 🚀 Installation
 
-## Contributing
+### Step 1 — Create fresh Laravel project
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer create-project laravel/laravel medintern
+cd medintern
+```
 
-## Code of Conduct
+### Step 2 — Copy generated files
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy all files from this repository into your Laravel project, preserving the directory structure:
 
-## Security Vulnerabilities
+```
+app/
+  Http/
+    Controllers/
+      AuthController.php
+      SuperAdminController.php
+      SupervisorController.php
+      StudentController.php
+    Middleware/
+      RoleMiddleware.php
+  Models/
+    User.php
+    Student.php
+    Report.php
+    Attachment.php
+    ReportNote.php
+  Services/
+    UserService.php
+    ReportService.php
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+bootstrap/
+  app.php
 
-## License
+database/
+  migrations/
+    2024_01_01_000001_create_users_table.php
+    2024_01_01_000002_create_students_table.php
+    2024_01_01_000003_create_reports_table.php
+    2024_01_01_000004_create_attachments_table.php
+    2024_01_01_000005_create_report_notes_table.php
+  seeders/
+    DatabaseSeeder.php
+    SuperAdminSeeder.php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+resources/views/
+  layouts/app.blade.php
+  auth/login.blade.php
+  admin/
+    dashboard.blade.php
+    supervisors/ (index, create, edit)
+    students/ (index)
+  supervisor/
+    dashboard.blade.php
+    students/ (index, create, edit)
+    reports/ (index, show)
+  student/
+    dashboard.blade.php
+    reports/ (index, create, edit, show, full-report)
+
+routes/
+  web.php
+```
+
+### Step 3 — Configure environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Edit `.env` with your database credentials:
+
+```env
+APP_NAME="MedIntern"
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=medintern
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
+
+### Step 4 — Create database
+
+```sql
+CREATE DATABASE medintern CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+### Step 5 — Run migrations and seed
+
+```bash
+php artisan migrate --seed
+```
+
+### Step 6 — Create storage link (for file uploads)
+
+```bash
+php artisan storage:link
+```
+
+### Step 7 — Start server
+
+```bash
+php artisan serve
+```
+
+Visit: **http://localhost:8000**
+
+---
+
+## 🔐 Default Login
+
+| Field | Value |
+|-------|-------|
+| Email | `ashley7520charles@gmail.com` |
+| Password | `admin123@` |
+
+> ⚠️ Change this password immediately after first login.
+
+---
+
+## 📁 File Upload Configuration
+
+Uploaded attachments are stored in `storage/app/public/attachments/`.
+
+Allowed file types: `PDF`, `DOC`, `DOCX`, `JPG`, `JPEG`, `PNG`  
+Maximum file size: **10MB per file**
+
+To change limits, update `StudentController.php`:
+```php
+'attachments.*' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,jpg,jpeg,png'],
+```
+
+---
+
+## 📋 Database Schema
+
+```
+users
+  id, name, email, phone, password, role (enum), is_active, timestamps
+
+students
+  id, user_id (FK), school, student_number, supervisor_id (FK → users),
+  internship_start_date, internship_end_date, timestamps
+
+reports
+  id, student_id (FK), report (text), date_submitted, status (enum), timestamps
+
+attachments
+  id, report_id (FK), file_name, file_path, file_type, document_name, file_size, timestamps
+
+report_notes
+  id, report_id (FK), user_id (FK), note (text), timestamps
+```
+
+---
+
+## 🗂 Key Routes
+
+### Auth
+| Method | URL | Description |
+|--------|-----|-------------|
+| GET | `/login` | Login page |
+| POST | `/login` | Authenticate |
+| POST | `/logout` | Sign out |
+
+### Super Admin (`/admin/*`)
+| Method | URL | Description |
+|--------|-----|-------------|
+| GET | `/admin/dashboard` | Dashboard |
+| GET | `/admin/supervisors` | List supervisors |
+| GET | `/admin/supervisors/create` | Create form |
+| POST | `/admin/supervisors` | Store supervisor |
+| GET | `/admin/supervisors/{id}/edit` | Edit form |
+| PUT | `/admin/supervisors/{id}` | Update supervisor |
+| PATCH | `/admin/supervisors/{id}/toggle` | Toggle active status |
+| GET | `/admin/students` | View all students |
+
+### Supervisor (`/supervisor/*`)
+| Method | URL | Description |
+|--------|-----|-------------|
+| GET | `/supervisor/dashboard` | Dashboard |
+| GET | `/supervisor/students` | My students |
+| POST | `/supervisor/students` | Create student |
+| GET | `/supervisor/reports` | All reports (with filters) |
+| GET | `/supervisor/reports/{id}` | Review a report |
+| PATCH | `/supervisor/reports/{id}/status` | Approve / Decline |
+| POST | `/supervisor/reports/{id}/notes` | Add note |
+
+### Student (`/student/*`)
+| Method | URL | Description |
+|--------|-----|-------------|
+| GET | `/student/dashboard` | Dashboard |
+| GET | `/student/reports` | My reports |
+| GET | `/student/reports/create` | Submit form |
+| POST | `/student/reports` | Submit report |
+| GET | `/student/reports/{id}` | View report |
+| GET | `/student/reports/{id}/edit` | Edit (pending only) |
+| PUT | `/student/reports/{id}` | Update report |
+| POST | `/student/reports/{id}/notes` | Add note |
+| DELETE | `/student/attachments/{id}` | Delete attachment |
+| GET | `/student/report/generate` | Full internship report |
+
+---
+
+## 🎨 UI Features
+
+- Clean sidebar navigation per role
+- Responsive Bootstrap 5 layout
+- Status badges (Pending / Approved / Declined)
+- Drag-and-drop file upload
+- Report filters (by student, status, date range)
+- Full internship report with print/PDF support
+- Flash success/error messages
+- Confirmation dialogs for destructive actions
+
+---
+
+## 📄 License
+
+MIT License — Free to use and modify.
