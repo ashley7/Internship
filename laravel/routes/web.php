@@ -14,10 +14,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
 
 // ── Password Reset ────────────────────────────────────────────
-Route::get('/forgot-password',          [PasswordResetController::class, 'showForgotForm'])->name('password.request');
-Route::post('/forgot-password',         [PasswordResetController::class, 'sendResetLink'])->name('password.email');
-Route::get('/reset-password/{token}',   [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
-Route::post('/reset-password',          [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::get('/forgot-password',        [PasswordResetController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password',       [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
+Route::post('/reset-password',        [PasswordResetController::class, 'resetPassword'])->name('password.reset');
 
 // ── Super Admin ───────────────────────────────────────────────
 Route::prefix('admin')->name('super_admin.')->middleware(['auth', 'role:super_admin'])->group(function () {
@@ -31,40 +31,47 @@ Route::prefix('admin')->name('super_admin.')->middleware(['auth', 'role:super_ad
     Route::put('/supervisors/{user}',           [SuperAdminController::class, 'updateSupervisor'])->name('supervisors.update');
     Route::patch('/supervisors/{user}/toggle',  [SuperAdminController::class, 'toggleSupervisor'])->name('supervisors.toggle');
 
-    // Students (read-only overview)
+    // Students
     Route::get('/students',                     [SuperAdminController::class, 'students'])->name('students');
+
+    // Procedures
+    Route::get('/procedures',                   [SuperAdminController::class, 'procedures'])->name('procedures');
+    Route::post('/procedures',                  [SuperAdminController::class, 'storeProcedure'])->name('procedures.store');
+    Route::put('/procedures/{procedure}',       [SuperAdminController::class, 'updateProcedure'])->name('procedures.update');
+    Route::patch('/procedures/{procedure}/toggle', [SuperAdminController::class, 'toggleProcedure'])->name('procedures.toggle');
+    Route::delete('/procedures/{procedure}',    [SuperAdminController::class, 'deleteProcedure'])->name('procedures.destroy');
 });
 
 // ── Supervisor ────────────────────────────────────────────────
 Route::prefix('supervisor')->name('supervisor.')->middleware(['auth', 'role:supervisor'])->group(function () {
-    Route::get('/dashboard',                        [SupervisorController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard',                            [SupervisorController::class, 'dashboard'])->name('dashboard');
 
     // Students
-    Route::get('/students',                         [SupervisorController::class, 'students'])->name('students');
-    Route::get('/students/create',                  [SupervisorController::class, 'createStudent'])->name('students.create');
-    Route::post('/students',                        [SupervisorController::class, 'storeStudent'])->name('students.store');
-    Route::get('/students/{student}/edit',          [SupervisorController::class, 'editStudent'])->name('students.edit');
-    Route::put('/students/{student}',               [SupervisorController::class, 'updateStudent'])->name('students.update');
+    Route::get('/students',                             [SupervisorController::class, 'students'])->name('students');
+    Route::get('/students/create',                      [SupervisorController::class, 'createStudent'])->name('students.create');
+    Route::post('/students',                            [SupervisorController::class, 'storeStudent'])->name('students.store');
+    Route::get('/students/{student}/edit',              [SupervisorController::class, 'editStudent'])->name('students.edit');
+    Route::put('/students/{student}',                   [SupervisorController::class, 'updateStudent'])->name('students.update');
+    Route::get('/students/{student}/summary',           [SupervisorController::class, 'studentSummary'])->name('students.summary');
 
     // Reports
-    Route::get('/reports',                          [SupervisorController::class, 'reports'])->name('reports');
-    Route::get('/reports/{report}',                 [SupervisorController::class, 'showReport'])->name('reports.show');
-    Route::patch('/reports/{report}/status',        [SupervisorController::class, 'updateStatus'])->name('reports.status');
-    Route::post('/reports/{report}/notes',          [SupervisorController::class, 'addNote'])->name('reports.notes.store');
+    Route::get('/reports',                              [SupervisorController::class, 'reports'])->name('reports');
+    Route::get('/reports/{report}',                     [SupervisorController::class, 'showReport'])->name('reports.show');
+    Route::patch('/reports/{report}/status',            [SupervisorController::class, 'updateStatus'])->name('reports.status');
+    Route::post('/reports/{report}/notes',              [SupervisorController::class, 'addNote'])->name('reports.notes.store');
 });
 
 // ── Student ───────────────────────────────────────────────────
 Route::prefix('student')->name('student.')->middleware(['auth', 'role:student'])->group(function () {
-    Route::get('/dashboard',                        [StudentController::class, 'dashboard'])->name('dashboard');
-    Route::get('/report/generate',                  [StudentController::class, 'generateReport'])->name('report.generate');
+    Route::get('/dashboard',                            [StudentController::class, 'dashboard'])->name('dashboard');
+    Route::get('/report/generate',                      [StudentController::class, 'generateReport'])->name('report.generate');
 
-    // Daily Reports
-    Route::get('/reports',                          [StudentController::class, 'reports'])->name('reports');
-    Route::get('/reports/create',                   [StudentController::class, 'createReport'])->name('reports.create');
-    Route::post('/reports',                         [StudentController::class, 'storeReport'])->name('reports.store');
-    Route::get('/reports/{report}',                 [StudentController::class, 'showReport'])->name('reports.show');
-    Route::get('/reports/{report}/edit',            [StudentController::class, 'editReport'])->name('reports.edit');
-    Route::put('/reports/{report}',                 [StudentController::class, 'updateReport'])->name('reports.update');
-    Route::post('/reports/{report}/notes',          [StudentController::class, 'addNote'])->name('reports.notes.store');
-    Route::delete('/attachments/{attachment}',      [StudentController::class, 'deleteAttachment'])->name('attachments.destroy');
+    Route::get('/reports',                              [StudentController::class, 'reports'])->name('reports');
+    Route::get('/reports/create',                       [StudentController::class, 'createReport'])->name('reports.create');
+    Route::post('/reports',                             [StudentController::class, 'storeReport'])->name('reports.store');
+    Route::get('/reports/{report}',                     [StudentController::class, 'showReport'])->name('reports.show');
+    Route::get('/reports/{report}/edit',                [StudentController::class, 'editReport'])->name('reports.edit');
+    Route::put('/reports/{report}',                     [StudentController::class, 'updateReport'])->name('reports.update');
+    Route::post('/reports/{report}/notes',              [StudentController::class, 'addNote'])->name('reports.notes.store');
+    Route::delete('/attachments/{attachment}',          [StudentController::class, 'deleteAttachment'])->name('attachments.destroy');
 });

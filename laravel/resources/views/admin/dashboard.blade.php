@@ -15,6 +15,9 @@
     <a href="{{ route('super_admin.students') }}" class="sidebar-link {{ request()->routeIs('super_admin.students*') ? 'active' : '' }}">
         <i class="bi bi-people"></i> Intern Doctors
     </a>
+    <a href="{{ route('super_admin.procedures') }}" class="sidebar-link {{ request()->routeIs('super_admin.procedures*') ? 'active' : '' }}">
+        <i class="bi bi-list-check"></i> Procedures
+    </a>
 @endsection
 
 @section('content')
@@ -65,7 +68,6 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Intern Doctors</th>
                                 <th>Status</th>
                                 <th></th>
@@ -83,8 +85,7 @@
                                     </div>
                                 </td>
                                 <td class="text-muted">{{ $sv->email }}</td>
-                                <td> <small class="text-muted">{{ $sv->phone }}</small></td>
-                                <td><span class="badge bg-light text-dark border">{{ $sv->supervised_students_count }} Intern Doctors</span></td>
+                                <td><span class="badge bg-light text-dark border">{{ $sv->supervised_students_count }} intern doctors</span></td>
                                 <td>
                                     <span class="status-badge {{ $sv->is_active ? 'badge-approved' : 'badge-declined' }}">
                                         {{ $sv->is_active ? 'Active' : 'Inactive' }}

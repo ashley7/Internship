@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Report;
+use App\Models\Procedure;
 use App\Services\UserService;
+use App\Services\ProcedureService;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
 {
-    public function __construct(private UserService $userService) {}
+    public function __construct(
+        private UserService      $userService,
+        private ProcedureService $procedureService,
+    ) {}
 
     public function dashboard()
     {
@@ -82,11 +87,10 @@ class SuperAdminController extends Controller
     {
         abort_unless($user->role === 'supervisor', 403);
         $this->userService->toggleStatus($user);
-
         return back()->with('success', 'Supervisor status updated.');
     }
 
-    // ── Students (overview) ──────────────────────────────────
+    // ── Students ─────────────────────────────────────────────
     public function students()
     {
         $students = Student::with('user', 'supervisor')
@@ -94,5 +98,46 @@ class SuperAdminController extends Controller
             ->paginate(20);
 
         return view('admin.students.index', compact('students'));
+    }
+
+    // ── Procedures ────────────────────────────────────────────
+    public function procedures()
+    {
+        $procedures = $this->procedureService->getAll();
+        return view('admin.procedures.index', compact('procedures'));
+    }
+
+    public function storeProcedure(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:procedures,name'],
+        ]);
+
+        $this->procedureService->create($request->all());
+
+        return back()->with('success', 'Procedure added successfully.');
+    }
+
+    public function updateProcedure(Request $request, Procedure $procedure)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:procedures,name,' . $procedure->id],
+        ]);
+
+        $this->procedureService->update($procedure, $request->all());
+
+        return back()->with('success', 'Procedure updated.');
+    }
+
+    public function toggleProcedure(Procedure $procedure)
+    {
+        $this->procedureService->toggle($procedure);
+        return back()->with('success', 'Procedure status updated.');
+    }
+
+    public function deleteProcedure(Procedure $procedure)
+    {
+        $this->procedureService->delete($procedure);
+        return back()->with('success', 'Procedure deleted.');
     }
 }

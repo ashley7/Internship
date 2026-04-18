@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'All Intern Doctors')
-@section('page-title', 'Intern Doctors')
+@section('page-title', 'All Intern Doctors')
 
 @section('sidebar-links')
     <div class="sidebar-section">Main</div>
@@ -14,7 +14,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h5 class="mb-0 fw-bold" style="color:#1a5276">All Intern Doctors</h5>
-        <small class="text-muted">{{ $students->total() }} Intern Doctor(s) across all supervisors</small>
+        <small class="text-muted">{{ $students->total() }} intern doctor(s) across all supervisors</small>
     </div>
 </div>
 
@@ -25,8 +25,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Intern Doctors</th>
-                        <th>Intern Doctors No.</th>
+                        <th>Intern Doctor</th>
+                        <th>Intern Doctor No.</th>
                         <th>School</th>
                         <th>Supervisor</th>
                         <th>Reports</th>
@@ -44,8 +44,7 @@
                                 </div>
                                 <div>
                                     <div class="fw-semibold">{{ $student->user->name }}</div>
-                                    <small class="text-muted">{{ $student->user->email }}</small> <br>
-                                    <small class="text-muted">{{ $student->user->phone }}</small>
+                                    <small class="text-muted">{{ $student->user->email }}</small>
                                 </div>
                             </div>
                         </td>
@@ -61,7 +60,7 @@
                     </tr>
                     @empty
                     <tr><td colspan="7" class="text-center text-muted py-5">
-                        <i class="bi bi-people fs-2 d-block mb-2 opacity-25"></i>No Intern Doctors yet.
+                        <i class="bi bi-people fs-2 d-block mb-2 opacity-25"></i>No intern doctors yet.
                     </td></tr>
                     @endforelse
                 </tbody>

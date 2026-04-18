@@ -6,7 +6,7 @@
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link"><i class="bi bi-people"></i> My Intern Doctors</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link"><i class="bi bi-people"></i> All Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link active"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 
@@ -15,10 +15,10 @@
     <div class="card-body py-3">
         <form action="{{ route('supervisor.reports') }}" method="GET" class="row g-2 align-items-end">
             <div class="col-md-3">
-                <label class="form-label mb-1">Intern Doctors</label>
+                <label class="form-label mb-1">Intern Doctor</label>
                 <select name="student_id" class="form-select form-select-sm">
                     <option value="">All Intern Doctors</option>
-                    @foreach($myStudents as $s)
+                    @foreach($allStudents as $s)
                         <option value="{{ $s->id }}" {{ ($filters['student_id'] ?? '') == $s->id ? 'selected' : '' }}>
                             {{ $s->user->name }}
                         </option>

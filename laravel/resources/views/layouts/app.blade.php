@@ -335,7 +335,12 @@
         <div class="sidebar-avatar">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
         <div class="sidebar-user-info">
             <strong>{{ auth()->user()->name }}</strong>
-            <span>{{ str_replace('_', ' ', auth()->user()->role == 'student'?'Intern Doctor':auth()->user()->role) }}</span>
+            <span>@switch(auth()->user()->role)
+                @case('student') Intern Doctor @break
+                @case('supervisor') Supervisor @break
+                @case('super_admin') Administrator @break
+                @default {{ str_replace('_', ' ', auth()->user()->role) }}
+            @endswitch</span>
         </div>
     </div>
 

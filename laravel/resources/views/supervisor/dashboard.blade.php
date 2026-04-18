@@ -9,7 +9,7 @@
     </a>
     <div class="sidebar-section">Management</div>
     <a href="{{ route('supervisor.students') }}" class="sidebar-link {{ request()->routeIs('supervisor.students*') ? 'active' : '' }}">
-        <i class="bi bi-people"></i> My Intern Doctors
+        <i class="bi bi-people"></i> All Intern Doctors
     </a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link {{ request()->routeIs('supervisor.reports*') ? 'active' : '' }}">
         <i class="bi bi-file-earmark-text"></i> Reports
@@ -22,7 +22,7 @@
         <div class="card stat-card" style="background:linear-gradient(135deg,#1a5276,#2e86c1);color:#fff;">
             <div class="stat-icon" style="background:rgba(255,255,255,.15)"><i class="bi bi-people" style="color:#fff"></i></div>
             <div class="stat-value">{{ $stats['students'] }}</div>
-            <div class="stat-label">My Intern Doctors</div>
+            <div class="stat-label">All Intern Doctors</div>
         </div>
     </div>
     <div class="col-sm-6 col-xl-3">
@@ -90,7 +90,7 @@
     <div class="col-lg-5">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="bi bi-people me-2"></i>My Intern Doctors</span>
+                <span><i class="bi bi-people me-2"></i>All Intern Doctors</span>
                 <a href="{{ route('supervisor.students.create') }}" class="btn btn-sm btn-primary">
                     <i class="bi bi-plus-lg"></i>
                 </a>
@@ -115,7 +115,7 @@
                 @empty
                 <div class="text-center text-muted py-5">
                     <i class="bi bi-people fs-2 d-block mb-2 opacity-25"></i>
-                    No Intern Doctors yet. <a href="{{ route('supervisor.students.create') }}">Add one.</a>
+                    No intern doctors yet. <a href="{{ route('supervisor.students.create') }}">Add one.</a>
                 </div>
                 @endforelse
             </div>

@@ -6,7 +6,7 @@
     <div class="sidebar-section">Main</div>
     <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link"><i class="bi bi-grid-1x2"></i> Dashboard</a>
     <div class="sidebar-section">Management</div>
-    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> My Intern Doctors</a>
+    <a href="{{ route('supervisor.students') }}" class="sidebar-link active"><i class="bi bi-people"></i> All Intern Doctors</a>
     <a href="{{ route('supervisor.reports') }}" class="sidebar-link"><i class="bi bi-file-earmark-text"></i> Reports</a>
 @endsection
 
@@ -14,15 +14,15 @@
 <div class="d-flex align-items-center gap-3 mb-4">
     <a href="{{ route('supervisor.students') }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
     <div>
-        <h5 class="mb-0 fw-bold" style="color:#1a5276">Edit: {{ $student->user->name }}</h5>
+        <h5 class="mb-0 fw-bold" style="color:#1a5276">Edit Intern Doctor: {{ $student->user->name }}</h5>
         <small class="text-muted">Leave password blank to keep existing</small>
     </div>
 </div>
 
 <div class="row justify-content-center">
-<div class="col-lg-8">
+<div class="col-lg-7">
 <div class="card">
-    <div class="card-header"><i class="bi bi-pencil me-2"></i>Student Details</div>
+    <div class="card-header"><i class="bi bi-pencil me-2"></i>Intern Details</div>
     <div class="card-body p-4">
         <form action="{{ route('supervisor.students.update', $student) }}" method="POST">
             @csrf @method('PUT')
@@ -50,18 +50,6 @@
                 <div class="col-md-6">
                     <label class="form-label">Confirm Password</label>
                     <input type="password" name="password_confirmation" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">School *</label>
-                    <input type="text" name="school" class="form-control @error('school') is-invalid @enderror"
-                           value="{{ old('school', $student->school) }}" required>
-                    @error('school')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Student Number *</label>
-                    <input type="text" name="student_number" class="form-control @error('student_number') is-invalid @enderror"
-                           value="{{ old('student_number', $student->student_number) }}" required>
-                    @error('student_number')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Start Date</label>

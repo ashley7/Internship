@@ -10,7 +10,7 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'student_id', 'report', 'date_submitted', 'status',
+        'student_id', 'patient_id', 'diagnosis', 'report', 'date_submitted', 'status',
     ];
 
     protected $casts = [
@@ -30,6 +30,11 @@ class Report extends Model
     public function notes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ReportNote::class)->with('user')->latest();
+    }
+
+    public function reportProcedures(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ReportProcedure::class)->with('procedure');
     }
 
     public function getStatusBadgeClass(): string
