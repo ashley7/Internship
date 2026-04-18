@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ResetPasswordMail;
+use App\Mail\Resetpasswordmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +47,7 @@ class PasswordResetController extends Controller
         // Send mail
         $resetUrl = route('password.reset.form', ['token' => $token, 'email' => $request->email]);
 
-        Mail::to($user->email)->send(new ResetPasswordMail($user, $resetUrl));
+        Mail::to($user->email)->send(new Resetpasswordmail($user, $resetUrl));
 
         return back()->with('status', 'A password reset link has been sent to your email address.');
     }
